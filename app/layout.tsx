@@ -1,16 +1,23 @@
 "use client";
 import { Inter } from 'next/font/google'
 import './globals.css'
+import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 const inter = Inter({ subsets: ['latin'] })
+export let PageContext = React.createContext<(auth : boolean) => void>((auth: boolean) => {})
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  let [authenticated, setAuthenticated] = useState<boolean>(false)
   let router = useRouter()
+
+  function updateAuthenticated(auth : boolean) {
+    setAuthenticated(auth)
+  }
 
   return (
     <html lang="en">
@@ -21,22 +28,25 @@ export default function RootLayout({
       <body className={inter.className}>
         <nav className="bg-slate-200 fixed w-full z-20 top-0 start-0 border-b border-gray-200">
           <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-            <div className="flex order-2 space-x-3 space-x-0 rtl:space-x-reverse">
+            <div className="flex order-2 space-x-0">
                 <button type="button" onClick={() => router.push("/login")} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center">Login/Signup</button>
+                {/*<button type="button" onClick={() => setAuthenticated(false)} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center">Logout</button>*/}
             </div>
-            <div className="items-center justify-between w-full flex w-auto">
-              <ul className="flex p-4 p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-slate-200 space-x-8 rtl:space-x-reverse flex-row mt-0 border-0 ">
+            <div className="items-center justify-between w-full flex w-auto order-1 h-8">
+              <ul className="flex p-4 p-0 font-medium border border-gray-100 rounded-lg bg-slate-200 space-x-8 flex-row mt-0 border-0 ">
                 <li>
-                  <a href="/" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 hover:bg-transparent hover:text-blue-700 p-0">Home</a>
+                  <a href="/" className="block py-1.5 px-3 text-gray-900 rounded hover:bg-gray-100 hover:bg-transparent hover:text-blue-700 p-0">Home</a>
                 </li>
-                <li>
-                  <a href="/reading-lists" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 hover:bg-transparent hover:text-blue-700 p-0">User's Reading Lists</a>
-                </li>
+                {authenticated &&
+                  <li>
+                    <a href="/profile" className="block py-1.5 px-3 text-gray-900 rounded hover:bg-gray-100 hover:bg-transparent hover:text-blue-700 p-0">Profile</a>
+                  </li>
+                }
               </ul>
             </div>
           </div>
         </nav>
-        {children}
+        <PageContext.Provider value={updateAuthenticated}>{children}</PageContext.Provider>
       </body>
     </html>
   )

@@ -1,22 +1,17 @@
-"use client";
-import React, { useState, useEffect } from 'react';
+"use client"
+import React, { useState, useEffect, useContext } from 'react'
+import { PageContext } from '../layout'
 
 export default function Login() {
-  let [helloWorld, setHelloWorld] = useState<string>("");
+  let updateAuthenticated = useContext(PageContext)
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/helloworld", { cache: 'no-store' })
-      .then(async (res : Response) => {
-        return await res.json();
-      })
-      .then((data : exampleData) => {
-        setHelloWorld(data.hello);
-      });
+    //updateAuthenticated(true)
   }, [])
 
   return (
     <div className="bg-gray-50">
-      <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+      <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto h-screen lg:py-0">
         <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">

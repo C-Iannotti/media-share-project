@@ -27,12 +27,8 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <nav className="bg-slate-200 fixed w-full z-20 top-0 start-0 border-b border-gray-200">
-          <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-            <div className="flex order-2 space-x-0">
-                <button type="button" onClick={() => router.push("/login")} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center">Login/Signup</button>
-                {/*<button type="button" onClick={() => setAuthenticated(false)} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center">Logout</button>*/}
-            </div>
-            <div className="items-center justify-between w-full flex w-auto order-1 h-8">
+          <div className="max-w-screen-xl flex items-center justify-between mx-auto p-4">
+            <div className="items-center justify-between w-full flex w-auto h-8">
               <ul className="flex p-4 p-0 font-medium border border-gray-100 rounded-lg bg-slate-200 space-x-8 flex-row mt-0 border-0 ">
                 <li>
                   <a href="/" className="block py-1.5 px-3 text-gray-900 rounded hover:bg-gray-100 hover:bg-transparent hover:text-blue-700 p-0">Home</a>
@@ -43,6 +39,10 @@ export default function RootLayout({
                   </li>
                 }
               </ul>
+            </div>
+            <div className="flex space-x-0">
+                <button type="button" onClick={() => router.push("/login")} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center">Login/Signup</button>
+                {/*<button type="button" onClick={() => setAuthenticated(false)} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center">Logout</button>*/}
             </div>
           </div>
         </nav>

@@ -1,6 +1,7 @@
-"use client";
-import React, { useState, useEffect, useContext } from 'react';
-import { PageContext } from './layout';
+"use client"
+import React, { useState, useEffect, useContext } from 'react'
+import { PageContext } from './layout'
+import MediaList from "./mediaList"
 
 export default function Home() {
   let updateAuthenticated = useContext(PageContext)
@@ -93,6 +94,7 @@ export default function Home() {
         </nav>
         */}
       </div>
+      <MediaList></MediaList>
     </main>
   )
 }
